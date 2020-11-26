@@ -72,7 +72,6 @@ exports.Update = (req, res, next) => {
             if (client) {
                 client.update({
                     moneyBalance: moneyBalance,
-
                 },
                     {
                         where: { id: id }
