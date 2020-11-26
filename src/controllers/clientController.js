@@ -63,9 +63,8 @@ exports.SelectDetail = (req, res, next) => {
 };
 
 exports.Update = (req, res, next) => {
-    const id = req.params.id;
 
-    const moneyBalance = client.moneyBalance - req.body.moneyBalance;
+    const moneyBalance = req.body.moneyBalance;
 
 
     Client.findByPk(id)
