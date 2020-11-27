@@ -62,17 +62,40 @@ exports.SelectDetail = (req, res, next) => {
         .catch(error => next(error));
 };
 
-exports.Update = (req, res, next) => {
+exports.Pay = (req, res, next) => {
     const id = req.params.id;
 
     const moneyBalance = req.body.moneyBalance;
-
 
     Client.findByPk(id)
         .then(client => {
             if (client) {
                 client.update({
-                    moneyBalance: moneyBalance,
+                    moneyBalance: (client.moneyBalance - moneyBalance),
+                },
+                    {
+                        where: { id: id }
+                    })
+                    .then(() => {
+                        res.status(status.OK).send();
+                    })
+                    .catch(error => next(error));
+            } else {
+                res.status(status.NOT_FOUND).send();
+            }
+        })
+        .catch(error => next(error));
+};
+exports.Encash = (req, res, next) => {
+    const id = req.params.id;
+
+    const moneyBalance = req.body.moneyBalance;
+
+    Client.findByPk(id)
+        .then(client => {
+            if (client) {
+                client.update({
+                    moneyBalance: (client.moneyBalance + moneyBalance),
                 },
                     {
                         where: { id: id }

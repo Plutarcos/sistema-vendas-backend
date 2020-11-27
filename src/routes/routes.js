@@ -6,7 +6,8 @@ const router = express.Router();
 router.post('/clients', ClientController.Insert);
 router.get('/clients', ClientController.SelectAll);
 router.get('/clients/:cpf', ClientController.SelectDetail);
-router.put('/clients/:id', ClientController.Update);
+router.put('/pay/:id', ClientController.Pay);
+router.put('/encash/:id', ClientController.Encash);
 router.delete('/clients/:id', ClientController.Delete);
 router.get('/login/:cpf/:password', ClientController.Login);
 
