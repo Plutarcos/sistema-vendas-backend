@@ -62,6 +62,30 @@ exports.SelectDetail = (req, res, next) => {
         .catch(error => next(error));
 };
 
+exports.SelectTransfer = (req, res, next) => {
+    const blockchainAddress = req.params.blockchainAddress;
+    const moneyBalance = req.body.moneyBalance;
+
+    Client.findOne({ where: { blockchainAddress: blockchainAddress } })
+        .then(client => {
+            if (client) {
+                client.update({
+                    moneyBalance: (client.moneyBalance + moneyBalance),
+                },
+                    {
+                        where: { blockchainAddress: blockchainAddress }
+                    })
+                    .then(() => {
+                        res.status(status.OK).send();
+                    })
+                    .catch(error => next(error));
+            } else {
+                res.status(status.NOT_FOUND).send();
+            }
+        })
+        .catch(error => next(error));
+};
+
 exports.Pay = (req, res, next) => {
     const id = req.params.id;
 
