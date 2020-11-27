@@ -175,3 +175,17 @@ exports.Login = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+exports.CheckAccount = async (req, res) => {
+    try {
+        const { cpf } = req.params;
+        const client = await Client.findOne({ where: { cpf: cpf } });
+
+        if (client) {
+            res.status(status.OK).send();
+        }
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

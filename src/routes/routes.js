@@ -11,6 +11,7 @@ router.put('/pay/:id', ClientController.Pay);
 router.put('/encash/:id', ClientController.Encash);
 router.delete('/clients/:id', ClientController.Delete);
 router.get('/login/:cpf/:password', ClientController.Login);
+router.get('/account/:cpf', ClientController.CheckAccount);
 
 module.exports = router;
 
