@@ -183,7 +183,9 @@ exports.CheckAccount = async (req, res) => {
 
         if (client) {
             res.status(status.OK).send();
-        }
+        }else{
+           res.status(404).send()
+}
 
     } catch (error) {
         res.status(400).json({ error: error.message });
